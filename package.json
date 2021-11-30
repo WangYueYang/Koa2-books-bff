@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon --exec 'babel-node ./app.js' "
+    "start": "NODE_ENV=development nodemon --exec 'babel-node ./app.js' ",
+    "test": "mocha --file ./tests/api.spec.js"
   },
   "author": "wangyueyang",
   "license": "ISC",
@@ -24,6 +25,8 @@
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
-    "nodemon": "^2.0.15"
+    "chai": "^4.3.4",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
   }
 }
