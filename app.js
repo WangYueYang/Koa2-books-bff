@@ -28,6 +28,7 @@ log4js.configure({
 });
 const logger = log4js.getLogger("server");
 
+// 捕获全局错误
 errorHandle.error(app, logger);
 
 
