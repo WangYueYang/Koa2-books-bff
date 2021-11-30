@@ -11,6 +11,15 @@
     {%for item in data%}
       <li>{{item.name}}</li>
     {%endfor%}
+    <button id="btn">click me</button>
   </ul>
+  <script src="/js/utils.js"></script>
+  <script>
+    function log(){
+      console.log(+new Date());
+    }
+    const logThrottle = window.throttle(log, 2000);
+    document.getElementById('btn').addEventListener('click', logThrottle);
+  </script>
 </body>
 </html>
