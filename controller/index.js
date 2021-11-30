@@ -1,18 +1,21 @@
-const Router = require('@koa/router');
-const IndexController = require('./indexController');
-const ApiController = require('./apiController');
+import Router from 'koa-router';
+import IndexController from './indexController';
+import ApiController from './apiController';
+import BookListController from './bookListController';
+
 
 const router = new Router();
 const indexController = new IndexController();
 const apiController = new ApiController();
-
+const bookListController = new BookListController();
 
 function initController(app) {
   router.get('/', indexController.actionIndex);
-  router.get('/api/getDataList', apiController.actionDataList);
-
+  router.get('/api/getBookList', apiController.actionBookList);
+  router.get('/books/list', bookListController.actionBookList);
+  
   
   app.use(router.routes()).use(router.allowedMethods());
 }
 
-module.exports = initController;
+export default initController;

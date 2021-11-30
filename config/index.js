@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 
 let config = {
   viewDir: path.join(__dirname, '../', 'views'),
@@ -25,4 +25,4 @@ if (process.env.NODE_ENV === 'production') {
 
 }
 
-module.exports = config;
+export default config;
