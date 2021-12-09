@@ -8,3 +8,12 @@
 [2021-11-30T15:39:40.978] [ERROR] server error - ctx.render3 is not a function
 [2021-11-30T15:39:52.664] [ERROR] server error - ctx.render4 is not a function
 [2021-11-30T16:30:56.695] [ERROR] server - fetch is not defined
+[2021-12-09T21:16:22.629] [ERROR] server - ENOENT: no such file or directory, open '/Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/books/list.html'
+[2021-12-09T21:17:15.504] [ERROR] server - Unexpected tag "incloud '../components/banner/banner.html'}
+  {% block content" on line 12 in file /Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/layouts/index.html.
+[2021-12-09T21:17:49.765] [ERROR] server - Unexpected tag "incloud '../components/banner/banner.html'}
+  {% block content" on line 12 in file /Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/layouts/index.html.
+[2021-12-09T21:17:57.144] [ERROR] server - Unexpected closing curly brace on line 12 in file /Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/layouts/index.html.
+[2021-12-09T21:18:03.324] [ERROR] server - Unexpected closing curly brace on line 12 in file /Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/layouts/index.html.
+[2021-12-09T21:19:38.269] [ERROR] server - Unexpected closing curly brace on line 12 in file /Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/layouts/index.html.
+[2021-12-09T21:25:28.857] [ERROR] server - Unexpected tag "incloud '../../components/banner/banner.html'" on line 12 in file /Users/wyy/Documents/wyy/study/github/koa-books/src/web/views/layouts/index.html.
