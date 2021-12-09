@@ -2,8 +2,25 @@ const {
   merge
 } = require('webpack-merge');
 
+// 可以通过正则表达式匹配对应的文件
+const glob = require("glob");
+
+
 // 1.判断打包环境
 // 遍历入口
+const files = glob.sync('./src/web/views/**/*.entry.js');
+const entry = {};
+
+files.forEach(url => {
+
+  // 通过正则匹配engry.js 入口js
+  if (/([a-zA-Z]+-[a-zA-z]+)\.entry\.js/.test(url)){
+    // RegExp.$1 是分组匹配的第一项clear
+    const entryKey = RegExp.$1;
+    const [pagesName, actionName] = entryKey.split('-');
+    entry[entryKey] = `./src/web/views/${pagesName}/${entryKey}.entry.js`
+  }
+})
 
 // 获取命令行参数， 获取当前环境
 const {
@@ -17,6 +34,9 @@ const envConfig = require(`./build/webpack.${mode}.js`)
 console.log(process.argv, argv.mode)
 
 const baseConfig = {
-
+  entry,
+  output: {
+    path: ''
+  }
 }
 module.exports = merge(baseConfig, envConfig);
