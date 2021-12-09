@@ -1,7 +1,7 @@
 const {
   merge
 } = require('webpack-merge');
-
+const path = require('path');
 // 可以通过正则表达式匹配对应的文件
 const glob = require("glob");
 
@@ -36,7 +36,16 @@ console.log(process.argv, argv.mode)
 const baseConfig = {
   entry,
   output: {
-    path: ''
+    path: path.join(__dirname, './dist/web/assets'),
+    filename: '[name].bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader'
+      }
+    ]
   }
 }
 module.exports = merge(baseConfig, envConfig);

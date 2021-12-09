@@ -27,6 +27,7 @@
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
+    "babel-loader": "^8.2.3",
     "chai": "^4.3.4",
     "glob": "^7.2.0",
     "jscpd": "^3.4.2",

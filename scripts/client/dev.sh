@@ -1,1 +1,1 @@
-webpack --mode deveploment
+webpack --mode development
