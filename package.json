@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "client:dev": "scripty",
+    "jscpd": "jscpd --pattern './jscpd-demo/index.js'",
     "start": "NODE_ENV=development nodemon --exec 'babel-node ./app.js' ",
     "test": "mocha --file ./tests/api.spec.js"
   },
@@ -26,7 +28,9 @@
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "chai": "^4.3.4",
+    "jscpd": "^3.4.2",
     "nodemon": "^2.0.15",
+    "scripty": "^2.0.0",
     "supertest": "^6.1.6"
   }
 }
