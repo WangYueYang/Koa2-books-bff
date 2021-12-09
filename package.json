@@ -6,7 +6,7 @@
   "scripts": {
     "client:dev": "scripty",
     "jscpd": "jscpd --pattern './jscpd-demo/index.js'",
-    "start": "NODE_ENV=development nodemon --exec 'babel-node ./app.js' ",
+    "start": "NODE_ENV=development nodemon --exec 'babel-node ./src/server/app.js' ",
     "test": "mocha --file ./tests/api.spec.js"
   },
   "author": "wangyueyang",
@@ -31,6 +31,10 @@
     "jscpd": "^3.4.2",
     "nodemon": "^2.0.15",
     "scripty": "^2.0.0",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-merge": "^5.8.0",
+    "yargs": "^17.3.0"
   }
 }
