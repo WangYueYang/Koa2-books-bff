@@ -6,7 +6,11 @@ const path = require('path');
 const glob = require("glob");
 
 const htmlWebpackPlugin = require('html-webpack-plugin');
+// 打包css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const copyWebpackPlugin = require('copy-webpack-plugin');
+
 // 1.判断打包环境
 // 遍历入口
 const files = glob.sync('./src/web/views/**/*.entry.js');
@@ -65,7 +69,13 @@ const baseConfig = {
   },
   plugins: [
     ...htmlPlugins,
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new copyWebpackPlugin({
+      patterns: [
+        { from: path.join(__dirname, './src/web/views/layouts'), to: "../web/views/layouts" },
+        { from: path.join(__dirname, './src/web/components'), to: "../web/components" },
+      ],
+    }),
   ]
 }
 module.exports = merge(baseConfig, envConfig);
