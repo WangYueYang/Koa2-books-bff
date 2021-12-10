@@ -6,7 +6,7 @@ const path = require('path');
 const glob = require("glob");
 
 const htmlWebpackPlugin = require('html-webpack-plugin');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 1.判断打包环境
 // 遍历入口
 const files = glob.sync('./src/web/views/**/*.entry.js');
@@ -22,7 +22,7 @@ files.forEach(url => {
     const [pagesName, actionName] = entryKey.split('-');
     entry[entryKey] = `./src/web/views/${pagesName}/${entryKey}.entry.js`;
 
-    
+
     // filename 需要设置一下，不然webpack会都打包成 index.html 引起同名错误
     htmlPlugins.push(new htmlWebpackPlugin({
       template: `./src/web/views/${pagesName}/pages/${actionName}.html`,
@@ -56,11 +56,16 @@ const baseConfig = {
       {
         test: /\.js$/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
   },
   plugins: [
     ...htmlPlugins,
+    new MiniCssExtractPlugin()
   ]
 }
 module.exports = merge(baseConfig, envConfig);
