@@ -5,11 +5,13 @@ const path = require('path');
 // 可以通过正则表达式匹配对应的文件
 const glob = require("glob");
 
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 // 1.判断打包环境
 // 遍历入口
 const files = glob.sync('./src/web/views/**/*.entry.js');
 const entry = {};
+const htmlPlugins = [];
 
 files.forEach(url => {
 
@@ -18,8 +20,18 @@ files.forEach(url => {
     // RegExp.$1 是分组匹配的第一项clear
     const entryKey = RegExp.$1;
     const [pagesName, actionName] = entryKey.split('-');
-    entry[entryKey] = `./src/web/views/${pagesName}/${entryKey}.entry.js`
+    entry[entryKey] = `./src/web/views/${pagesName}/${entryKey}.entry.js`;
+
+    
+    // filename 需要设置一下，不然webpack会都打包成 index.html 引起同名错误
+    htmlPlugins.push(new htmlWebpackPlugin({
+      template: `./src/web/views/${pagesName}/pages/${actionName}.html`,
+      filename: `../web/views/${pagesName}/pages/${actionName}.html`,
+      // 这里只打包自己的文件
+      chunks: ['runtime', entryKey]
+    }))
   }
+
 })
 
 // 获取命令行参数， 获取当前环境
@@ -46,6 +58,9 @@ const baseConfig = {
         use: 'babel-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    ...htmlPlugins,
+  ]
 }
 module.exports = merge(baseConfig, envConfig);
