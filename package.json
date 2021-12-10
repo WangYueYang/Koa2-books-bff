@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client:dev": "scripty",
+    "start:test": "NODE_ENV=development nodemon --exec 'babel-node ./dist/server/app.js' ",
     "jscpd": "jscpd --pattern './jscpd-demo/index.js'",
     "start": "NODE_ENV=development nodemon --exec 'babel-node ./src/server/app.js' ",
     "test": "mocha --file ./tests/api.spec.js"

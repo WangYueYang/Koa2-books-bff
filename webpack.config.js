@@ -52,7 +52,7 @@ console.log(process.argv, argv.mode)
 const baseConfig = {
   entry,
   output: {
-    path: path.join(__dirname, './dist/web/assets'),
+    path: path.join(__dirname, './dist/assets'),
     filename: '[name].bundle.js'
   },
   module: {
