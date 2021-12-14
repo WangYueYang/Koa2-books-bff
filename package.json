@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preclient:dev": "rm -rf ./dist",
     "client:dev": "scripty",
     "start:test": "NODE_ENV=development nodemon --exec 'babel-node ./dist/server/app.js' ",
     "jscpd": "jscpd --pattern './jscpd-demo/index.js'",

@@ -32,7 +32,7 @@ files.forEach(url => {
     // filename 需要设置一下，不然webpack会都打包成 index.html 引起同名错误
     htmlPlugins.push(new htmlWebpackPlugin({
       template: `./src/web/views/${pagesName}/pages/${actionName}.html`,
-      filename: `../web/views/${pagesName}/pages/${actionName}.html`,
+      filename: `../views/${pagesName}/pages/${actionName}.html`,
       // 这里只打包自己的文件
       chunks: ['runtime', entryKey],
       inject: false
@@ -55,8 +55,8 @@ console.log(process.argv, argv.mode)
 const baseConfig = {
   entry,
   output: {
-    path: path.join(__dirname, './dist/assets'),
-    filename: '[name].bundle.js'
+    path: path.join(__dirname, './dist/web/assets'),
+    filename: '[name].[contenthash].js'
   },
   module: {
     rules: [
@@ -75,8 +75,8 @@ const baseConfig = {
     new MiniCssExtractPlugin(),
     new copyWebpackPlugin({
       patterns: [
-        { from: path.join(__dirname, './src/web/views/layouts'), to: "../web/views/layouts" },
-        { from: path.join(__dirname, './src/web/components'), to: "../web/components" },
+        { from: path.join(__dirname, './src/web/views/layouts'), to: "../views/layouts" },
+        { from: path.join(__dirname, './src/web/components'), to: "../components" },
       ],
     }),
     new afterHtmlPlugin()
