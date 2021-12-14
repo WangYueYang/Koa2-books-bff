@@ -38,6 +38,7 @@
     "glob": "^7.2.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
+    "gulp-watch": "^5.0.1",
     "html-webpack-plugin": "^5.5.0",
     "jscpd": "^3.4.2",
     "mini-css-extract-plugin": "^2.4.5",

@@ -1,16 +1,22 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-
+const watch = require('gulp-watch');
 
 function buildDev() {
-  return gulp.src('./src/server/**/*.js')
+  return watch('./src/server/**/*.js', { ignoreInitial: false })
     .pipe(
       babel({
-        plugins: ["@babel/plugin-transform-modules-commonjs"],
-        babelrc: false
+        plugins: ['@babel/plugin-transform-modules-commonjs'],
+        babelrc: false,
       })
     )
-    .pipe(gulp.dest('dist/server'))
+    .pipe(gulp.dest('dist/server'));
 }
 
-exports.default = gulp.series(buildDev);
+let build = null;
+
+if ((process.env.NODE_ENV = 'deveploment')) {
+  build = gulp.series(buildDev);
+}
+
+gulp.task('default', build);
