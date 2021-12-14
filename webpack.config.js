@@ -11,6 +11,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const copyWebpackPlugin = require('copy-webpack-plugin');
 
+const afterHtmlPlugin = require('./build/afterHtmlPlugin');
+
 // 1.判断打包环境
 // 遍历入口
 const files = glob.sync('./src/web/views/**/*.entry.js');
@@ -32,7 +34,8 @@ files.forEach(url => {
       template: `./src/web/views/${pagesName}/pages/${actionName}.html`,
       filename: `../web/views/${pagesName}/pages/${actionName}.html`,
       // 这里只打包自己的文件
-      chunks: ['runtime', entryKey]
+      chunks: ['runtime', entryKey],
+      inject: false
     }))
   }
 
@@ -76,6 +79,7 @@ const baseConfig = {
         { from: path.join(__dirname, './src/web/components'), to: "../web/components" },
       ],
     }),
+    new afterHtmlPlugin()
   ]
 }
 module.exports = merge(baseConfig, envConfig);
