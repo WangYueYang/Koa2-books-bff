@@ -6,7 +6,8 @@
   "scripts": {
     "preclient:dev": "rm -rf ./dist",
     "client:dev": "scripty",
-    "start:test": "NODE_ENV=development nodemon --exec 'babel-node ./dist/server/app.js' ",
+    "server:dev": "scripty",
+    "start:test": "NODE_ENV=development nodemon ./dist/server/app.js",
     "jscpd": "jscpd --pattern './jscpd-demo/index.js'",
     "start": "NODE_ENV=development nodemon --exec 'babel-node ./src/server/app.js' ",
     "test": "mocha --file ./tests/api.spec.js"
@@ -28,12 +29,15 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.5",
     "@babel/preset-env": "^7.16.4",
     "babel-loader": "^8.2.3",
     "chai": "^4.3.4",
     "copy-webpack-plugin": "^10.0.0",
     "css-loader": "^6.5.1",
     "glob": "^7.2.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "html-webpack-plugin": "^5.5.0",
     "jscpd": "^3.4.2",
     "mini-css-extract-plugin": "^2.4.5",
