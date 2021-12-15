@@ -7,7 +7,6 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 // 打包css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const copyWebpackPlugin = require('copy-webpack-plugin');
 
 const afterHtmlPlugin = require('./build/afterHtmlPlugin');
 
@@ -45,9 +44,9 @@ const mode = argv.mode;
 
 // 获取对应环境的webpackconfig
 const envConfig = require(`./build/webpack.${mode}.js`);
-console.log(process.argv, argv.mode);
 
 const baseConfig = {
+  mode,
   entry,
   output: {
     path: path.join(__dirname, './dist/web/assets'),
@@ -68,18 +67,6 @@ const baseConfig = {
   plugins: [
     ...htmlPlugins,
     new MiniCssExtractPlugin(),
-    new copyWebpackPlugin({
-      patterns: [
-        {
-          from: path.join(__dirname, './src/web/views/layouts'),
-          to: '../views/layouts',
-        },
-        {
-          from: path.join(__dirname, './src/web/components'),
-          to: '../components',
-        },
-      ],
-    }),
     new afterHtmlPlugin(),
   ],
 };
