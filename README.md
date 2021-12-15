@@ -17,3 +17,34 @@
 19. 了解了 mocha 配合 chai  断言库.
 
 ## Webpack深度细化BFF
+主要分为两个部分的打包， web -》 webpack 打包， server -》 gulp 打包
+
+通过 scripty 优化我们的 npm scripts，可以把 npm 脚本放在我们单独的 scripts 文件下的 .sh 文件里去进行管理。
+Jscpd 检查重复代码
+将前后端代码统一放到 src 目录下， 新建 web 和 server 分别进行管理
+
+### 通过 webpack 打包 web 代码
+1.通过 yargs 获取命令行参数，主要是获取当前的环境变量 development | production
+2.创建通用的 webpack.config.js 文件和 build 目录里分别创建 prod | dev 环境下的webpack.config，然后再通过 webpack-merge 进行合并。对不同环境的 webpack 配置进行管理
+3.开始配置 webpack 入口 entry，因为是一个多页面的应用，所以会有多个入口，这个时候给每个需要配置入口的页面添加 entry.js ，通过 glob 这个包匹配到所有的 entry.js 此时获取到的是一个数组，然后这个数组进行遍历，再通过增则匹配对应的 entry.js 分别添加对应的 entryKey: entryVal
+4. webpack 配置出口 output ，只是简单的配到 dist 目录下，再具体的就对应 src 目录就好了，output 的path 是绝对路径需要 path.join(__dirname, 'dist')，filename: 就配置 [name].[contenthash] 这种 name + 哈希的就行。
+5. 再对html进行打包, 通过 html-webpack-plugin 对每一个页面进行打包，因为是多页的应用，所以和入口配置在一起进行便利，然后 push 到数组里，再到 webpack 的 plugins 通过 [...htmlWebpackPlugin] 展开，具体的配置参数有 template, filename, chunks, inject
+6. 基础的loader配置，需要什么 loader 加什么 loader 就好了, 这里的 css rules 里还用到了 MiniCssExtractPlugin 这个插件将 CSS 提取到单独的文件中。它为每个包含 CSS 的 JS 文件创建一个 CSS 文件。它支持按需加载 CSS 和 SourceMap。它建立在新的 webpack v5 功能之上，并且需要 webpack 5 才能工作。
+7.html 里使用 swig 模版，通过 copy-webpack-plugin 把模版的html copy 到 dist 目录里，而没有使用 webpack 进行打包
+
+打包 web 文件有几个需要注意的点：
+1. 如果是多页应用的话，需要配置多个入口和对多个 html 进行配置和打包处理
+2. src 下目录结构里 静态资源，模版，组件 等等 这些文件的目录结构的设计。
+
+上面的东西完成后还有一个webpack打包后的问题就是，对于 swig 模板里引入的静态资源被打包后不能插入到 swig 指定的代码块了，这里需要写一个 webpack 插件通过替换掉 swig 指定代码块里的占位符来完成插入。
+
+### webpack 插件
+通过类的 apply 方法，获取到 compiler 模块，也就是 webpack 的主要引擎，compiler.hooks 有很多 webpack 的钩子，在不同的生命周期里会被触发，再通过compilation 配合 htmlWebpackPlugin 的生命周期修改打包后的 html 内容
+
+### 通过 gulp 打包 server
+1. 通过 @babel/plugin-transform-modules-commonjs 编译 server 代码 为 commonjs ，在 .pipe(babel({})) 的配置里设置 babelrc: false，不使用 .babelrc 里的配置，通过 gulp.src 和 gulp.dest 配置入口和出口
+2. gulp-watch 添加热更新，用 watch() 替换掉 gulp.src
+3. gulp-rollup treeshaking 掉垃圾代码，
+4. @rollup/plugin-replace 去掉和当前配置环境不同的配置
+5. html-minifier 压缩 html 代码
+6. optimize-css-assets-webpack-plugin 压缩 css 代码
