@@ -1,4 +1,5 @@
 const copyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path')
 module.exports = {
   watch: true,
   plugins: [

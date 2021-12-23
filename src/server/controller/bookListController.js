@@ -1,5 +1,5 @@
-import Controller from "./controller";
-import BooksModel from "../models/booksModel";
+import Controller from './controller';
+import BooksModel from '../models/booksModel';
 
 class BookListController extends Controller {
   constructor() {
@@ -10,10 +10,13 @@ class BookListController extends Controller {
     const booksModel = new BooksModel();
     const data = await booksModel.getBooksList();
     ctx.body = await ctx.render('books/pages/list', {
-      data: data.data
+      data: data.data,
     });
   }
-}
 
+  async acctionCreateBook(ctx) {
+    ctx.body = await ctx.render('books/pages/create');
+  }
+}
 
 export default BookListController;
